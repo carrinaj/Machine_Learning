@@ -1,0 +1,101 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from chatterbot.trainers import ListTrainer # method to train\n",
+    "from chatterbot import ChatBot # import Chatbot\n",
+    "import os"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "bot = ChatBot('Bot') # create the bot\n",
+    "bot.set_trainer(ListTrainer) # Set the trainer"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "List Trainer: [####################] 100%\n",
+      "List Trainer: [####################] 100%\n",
+      "List Trainer: [####################] 100%\n"
+     ]
+    }
+   ],
+   "source": [
+    "for _file in os.listdir('chatbot'):\n",
+    "    chats = open('chatbot/' + _file, 'r').readlines()\n",
+    "    bot.train(chats)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "You: hi\n",
+      "ChatBot: Hello\n",
+      "You: what's your favorite movie?\n",
+      "ChatBot: There’s a lot of movies I like.\n"
+     ]
+    }
+   ],
+   "source": [
+    "while True:\n",
+    "    message = input('You: ')\n",
+    "    if message.strip() != 'Bye':\n",
+    "            reply = bot.get_response(message)\n",
+    "            print('ChatBot:', reply)\n",
+    "    if message.strip() == 'Bye':\n",
+    "            print('ChatBot: Bye')\n",
+    "            break"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
